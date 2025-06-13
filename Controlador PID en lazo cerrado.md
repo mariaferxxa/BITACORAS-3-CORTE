@@ -128,6 +128,19 @@ $$\frac{P_{u}}{1.2}=\frac{1.894}{8}=0.236$$
 #### Ejemplo 2
 
 
+## Ejercicios
+### Ejercicio 1
+![image](https://github.com/user-attachments/assets/cf47ae6e-a075-4b96-8bd9-1544dceb7534)
+
+Caracteristicas del Relé
+d= 10% ; $\epsilon = 0.5°C$
+
+Caracteristicas del ciclo límite:
+a= 1.1°C ; tc=6.7min
+
+Calcular la ganancia critica
+
+$$K_{c}=\frac{4(10)}{\pi\sqrt{1.1^{2}-0.5^{2}}}\cong 13$$
 
 ## CONCLUSIONES
 
