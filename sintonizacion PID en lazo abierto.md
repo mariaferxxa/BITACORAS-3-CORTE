@@ -79,7 +79,7 @@ Cada arquitectura tiene ventajas según el tipo de planta y facilidad de impleme
  
 - Derivativa: Suaviza la respuesta, disminuyendo el sobreimpulso, pero puede generar ruido si se exagera.
   
-## CRITERIOS DE DESEMPEÑO PARA DISEÑO DE PID
+## CRITERIOS DE DESEMPEÑO 
 ### Funciones de costo más utilizadas
 Este es un método más técnico y matemático, ideal para usar en simulaciones o con sistemas complejos. Aquí, en lugar de ajustar a mano, se define una función de costo que mide qué tan bien está funcionando el sistema, y luego se busca minimizar esa función.
 
@@ -112,44 +112,39 @@ Este método sirve para ajustar el comportamiento del sistema de manera práctic
 
 ### 4.2. Ziegler & Nichols (curva de reacción):
 Usa modelo tipo FOPDT identificado previamente:
-Tablas permiten calcular los parámetros PID según el tipo de controlador:
+La siguiente tabla permite calcular los parámetros PID según el tipo de controlador:
 
-+---------------------+----------------------------+----------+----------+--+
-| tipo de controlador | Kp                         | Ti       | Td       |  |
-+---------------------+----------------------------+----------+----------+--+
-| P                   | $\frac{\tau}{t_{o}K}$      | -        | -        |  |
-+---------------------+----------------------------+----------+----------+--+
-|                     | $ \frac{0.9\tau}{t_{o}K}$  | $3.3t_{o}$| -        |  |
-+---------------------+----------------------------+----------+----------+--+
-|                     |  $\frac{1.2\tau}{t_{o}K}$  | $2t_{o}$  | $0.5t_{o}$ |  |
-+---------------------+----------------------------+----------+----------+--+
+#### Tabla
+
+| tipo de controlador | Kp                         | Ti        | Td         |
+|---------------------|----------------------------|-----------|------------|
+| P                   | $\frac{\tau}{t_{o}K}$      | -         | -          |
+| PI                  |  $\frac{0.9\tau}{t_{o}K}$  | $3.3t_{o}$| -          |
+| PID                 |  $\frac{1.2\tau}{t_{o}K}$  | $2t_{o}$  | $0.5t_{o}$ | 
 
 
 
 
 ### 4.3. Cohen-Coon:
-Proporciona mejor desempeño cuando el retardo no es muy dominante. Usa también parámetros  para definir:
+Este método proporciona una mejor respuesta que Ziegler-Nichols en sistemas donde el tiempo muerto no domina totalmente la dinámica del proceso. Las fórmulas consideran la compensación del retardo y permiten una respuesta más rápida y con menor sobreimpulso en muchos casos prácticos. Este método está especialmente indicado cuando se desea una sintonización inicial más refinada sin necesidad de recurrir a simulaciones complejas.
 
- con expresiones que dependen de .
+#### Tabla
+![image](https://github.com/user-attachments/assets/5d506d69-b03f-4d99-b001-8b9091760ae2)
+
 
 ### 4.4. Coeficiente de ajustabilidad:
-Utiliza un parámetro  para seleccionar reglas de sintonización específicas.
+Este método se basa en un parámetro adimensional $\gamma=\frac{t_{m}}{\tau}$ , donde $t_{m}$  es el tiempo en el que la respuesta alcanza su máximo y $\tau$ la constante de tiempo del modelo. En función del valor de , se determinan los valores de $k_{p}, T_{i}, T_{d}$  con reglas ajustadas a ese comportamiento dinámico particular. Ofrece una sintonización más precisa adaptada a distintos regímenes dinámicos del sistema, y se considera una evolución de las tablas clásicas al incorporar el efecto del sobreimpulso observado en la curva de respuesta.
+
+#### Tabla
+
+| _y_       | Kp                                   | Ti                    | Td                                     |   |
+|-----------|--------------------------------------|-----------------------|----------------------------------------|---|
+| 0 a 0.1   | $$\frac{5}{K}$$                      | $$\tau$$              | -                                      |   |
+| 0.1 a 0.2 | $$\frac{0.5}{K\gamma}$$              | $$\tau$$              | -                                      |   |
+| 0.2 a 0.5 | $$\frac{0.5(1+0.5\gamma)}{K\gamma}$$ | $$\tau(1+0.5\gamma)$$ | $$\tau*\frac{0.5\gamma}{0.5\gamma+1}$$ |   |
 
 ### 4.5. Smith y otros métodos:
 Métodos adaptativos y reglas derivadas de análisis estadístico o simulación.
-## CRITERIOS DE DESEMPEÑO
-
-Para comparar respuestas y definir optimización, se utilizan funciones de costo:
-
-IE (Integral del Error): 
-
-ISE (Integral del Error Cuadrado): 
-
-IAE (Integral del Error Absoluto): 
-
-ITAE (Integral del Error Absoluto por el Tiempo): 
-
-Estos criterios permiten cuantificar el desempeño del sistema y buscar un ajuste óptimo de los parámetros del controlador.
 
 ## CONCLUSIONES
 
