@@ -4,34 +4,38 @@ La sintonización de controladores PID en lazo abierto representa uno de los pil
 Los controladores PID pueden configurarse bajo diferentes arquitecturas y deben sintonizarse para garantizar el rendimiento deseado del sistema. Existen diversos métodos de sintonización, desde los empíricos como Ziegler-Nichols, hasta los basados en criterios de optimización y funciones de costo.
 ## CONCEPTOS CLAVE
 
-PID: Controlador con acciones proporcional, integral y derivativa.
+> 🔑 **PID: Controlador con acciones proporcional, integral y derivativa.**
 
-Ganancia proporcional (): Intensidad de la acción frente al error actual.
+> 🔑 **Ganancia proporcional (kp ): Intensidad de la acción frente al error actual.**
 
-Constante de tiempo integral (): Tiempo que tarda en corregir errores acumulados.
+> 🔑 **Constante de tiempo integral (ki): Tiempo que tarda en corregir errores acumulados.**
 
-Constante derivativa (): Reacción frente a cambios bruscos del error.
+> 🔑 **Constante derivativa (kd): Reacción frente a cambios bruscos del error.**
 
-Arquitectura paralela: Implementación clásica con suma directa de las tres acciones.
+> 🔑 **Arquitectura paralela: Implementación clásica con suma directa de las tres acciones.**
 
-Ziegler-Nichols: Método empírico basado en la curva de reacción.
+> 🔑 **Ziegler-Nichols: Método empírico basado en la curva de reacción.**
 
-FOPDT: Modelo de primer orden con retardo ().
+> 🔑 **FOPDT: Modelo de primer orden con retardo ().**
 
-Función de costo: Medida para evaluar el error del sistema.
+> 🔑 **Caída de 1/4: Patrón buscado en respuestas oscilatorias controladas.**
 
-Caída de 1/4: Patrón buscado en respuestas oscilatorias controladas.
-
-Prueba y error: Ajuste secuencial de las ganancias hasta lograr respuesta deseada.
+> 🔑 **Prueba y error: Ajuste secuencial de las ganancias hasta lograr respuesta deseada.**
 
 ## CONTROLADORES PID
 Un controlador PID combina tres acciones fundamentales:
 
 Proporcional (P): Amplifica el error en tiempo real para responder rápidamente.
 
+$$U(s)=k_{p}*E(s)$$
+
 Integral (I): Acumula el error para eliminar el error en estado estacionario.
 
+$$U(s)=k_{i}*\frac{E(s)}{s}$$
+
 Derivativa (D): Predice el comportamiento del error y reduce oscilaciones.
+
+$$U(s)=k_{d}*sE(s)$$
 
 La acción de control se define como:
 Cada término afecta de forma distinta la respuesta del sistema, y su combinación permite una regulación más fina y estable.
@@ -40,31 +44,60 @@ Cada término afecta de forma distinta la respuesta del sistema, y su combinaci�
 
 Se reconocen varias configuraciones clásicas:
 
-Paralela: suma directa de las acciones P, I y D.
+### Paralela:
+Es la suma directa de las acciones P, I y D.
+![image](https://github.com/user-attachments/assets/454dbafe-9024-4438-ad13-8f11442fd61b)
 
-Ideal: expresada en términos de tiempo integral  y derivativo .
+#### Formula
 
-Serie: las acciones se concatenan en cascada.
+$$U(s)=k_{p}E(s)+k_{i}\frac{E(s)}{s}+k_{d}s*E(s)$$
+
+### Ideal:
+Los bloques del PID están idealmente implementados sin ruido, sin retardo, sin saturación
+
+![image](https://github.com/user-attachments/assets/32ef7d67-ee47-4888-afa6-bf143d3b10c6)
+
+#### Formula
+
+$$U(s)=k_{p}(E(s)+\frac{1}{T_{i}}\frac{E(s)}{s}+T_{d}s*E(s))$$
+
+### Serie:
+las acciones se concatenan en cascada.
+![image](https://github.com/user-attachments/assets/9a756451-2e94-4220-a90b-02b0e67b0a99)
+
+#### Formula
+
+$$U(s)=((E(s)(1+T_{d}*s))k_{p})(1+\frac{1}{T_{i}s})$$
 
 Cada arquitectura tiene ventajas según el tipo de planta y facilidad de implementación.
 
 ## EFECTOS DE LAS ACCIONES DE CONTROL
 
-Proporcional: Aumenta la rapidez pero puede generar sobreimpulso.
+- Proporcional: Aumenta la rapidez pero puede generar sobreimpulso.
 
-Integral: Elimina el error permanente pero puede ralentizar la respuesta.
+- Integral: Elimina el error permanente pero puede ralentizar la respuesta.
+ 
+- Derivativa: Suaviza la respuesta, disminuyendo el sobreimpulso, pero puede generar ruido si se exagera.
 
-Derivativa: Suaviza la respuesta, disminuyendo el sobreimpulso, pero puede generar ruido si se exagera.
+## CRITERIOS DE DESEMPEÑO PARA DISEÑO DE PID
+### Funciones de costo mas utilizadas
+Este es un método más técnico y matemático, ideal para usar en simulaciones o con sistemas complejos. Aquí, en lugar de ajustar a mano, se define una función de costo que mide qué tan bien está funcionando el sistema, y luego se busca minimizar esa función.
 
 ## MÉTODOS DE SINTONIZACIÓN EN LAZO ABIERTO
 
 ### 4.1. Prueba y error:
-Metodología más usada en la industria por su simplicidad:
-Fijar , .
-Ajustar  hasta lograr tiempo de establecimiento razonable.
-Incrementar  hasta reducir error permanente.
-Agregar  para reducir oscilaciones.
-Ajustar nuevamente todos los parámetros de forma fina.
+-Se inicia con solo la acción proporcional, se colocan las ganancias integral y derivativa en cero.
+
+-Se ajusta la ganancia proporcional poco a poco hasta que el sistema responde con un tiempo de establecimiento aceptable, es decir, que llegue rápido al valor deseado.
+
+-Luego, se activa la acción integral, aumentando su ganancia gradualmente hasta reducir o eliminar el error en estado estacionario (cuando la salida no llega exactamente a la referencia).
+
+-Después, se ajusta la acción derivativa para reducir las oscilaciones y hacer el sistema más estable o menos ruidoso.
+
+-Finalmente, se vuelven a ajustar finamente todas las ganancias hasta encontrar una respuesta equilibrada (sin mucho sobreimpulso, ni lentitud, ni oscilaciones excesivas).
+
+Este método sirve para ajustar el comportamiento del sistema de manera práctica, sin necesidad de usar matemáticas avanzadas o simulaciones, aunque requiere experiencia y puede ser lento o impreciso.
+
 ### 4.2. Ziegler & Nichols (curva de reacción):
 Usa modelo tipo FOPDT identificado previamente:
 Tablas permiten calcular los parámetros PID según el tipo de controlador:
