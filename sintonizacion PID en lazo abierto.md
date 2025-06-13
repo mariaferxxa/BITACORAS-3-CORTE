@@ -171,6 +171,20 @@ Este método se basa en un parámetro adimensional $\gamma=\frac{t_{m}}{\tau}$ ,
 ### 4.5. Smith y otros métodos:
 Métodos adaptativos y reglas derivadas de análisis estadístico o simulación.
 
+### Ejercicios:
+#### Ejercicio 1
+Con la funcion de transferencia 
+
+$$G(s)=\frac{10}{40s+1}e^{-2s}$$
+
+Hacer un controlador PI
+
+$$K_{c}=\frac{0.9\tau}{kt_{0}}=\frac{0.9(40)}{10(2)}=1.8$$
+
+$$T_{i}=\frac{t_{d}}{0.3}=\frac{2}{0.3}=6.66$$
+
+$$G_{c}(s)=\frac{k_{c}(s+\frac{1}{t_{d}})}{s}=\frac{1.8(s+\frac{1}{6.66})}{s}$$
+
 ## CONCLUSIONES
 
 La sintonización de controladores PID en lazo abierto es un proceso crucial para garantizar que un sistema de control tenga un desempeño adecuado frente a perturbaciones y cambios de referencia. A través de diversas metodologías, es posible ajustar los parámetros del controlador para obtener una respuesta rápida, precisa y estable.
