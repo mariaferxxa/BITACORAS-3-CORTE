@@ -144,9 +144,13 @@ $$G(s)=\frac{ke^{-t_{o}s}}{s}$$
 
 Identificación:
 
-Se eligen 3 puntos temporales y se miden los valores correspondientes de entrada y salida.
+-Se eligen 3 puntos temporales y se miden los valores correspondientes de entrada y salida.
 
-Se aplican las fórmulas para obtener  y .
+-Se aplican las fórmulas para obtener K y $t_{o}$
+
+$$K=\frac{O_{2}-O_{1}}{(I_{2}-I_{1})(T_{3}-T_{2})}$$
+
+$$t_{0}=T_{2}-T_{1}$$
 
 Esto permite diseñar controladores incluso en procesos lentos o acumulativos.
 
