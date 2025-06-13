@@ -106,6 +106,7 @@ Efectos del anti wind-up:
 Estas estrategias son esenciales en sistemas reales donde los actuadores tienen límites físicos definidos y los errores pueden ser grandes, como en válvulas, motores o fuentes de potencia.
 
 ### Ejemplo
+#### ejemplo 1
 - Se determina analiticamente que $-(\omega)^{2}+11$ es la parte imaginaria y $6\omega^{2}+6+k_{p}$ es la parte real. Calcular Pu, Ku, y calcular el PID resultante
 
   $$P_{u}=\frac{2\pi}{\omega}=\frac{2\pi}{\sqrt{11}}=1.894s$$
@@ -123,6 +124,10 @@ $$k_{p}=0.6*60=36$$
 $$\frac{P_{u}}{1.2}=\frac{1.894}{2}=0.947$$
 
 $$\frac{P_{u}}{1.2}=\frac{1.894}{8}=0.236$$
+
+#### Ejemplo 2
+
+
 
 ## CONCLUSIONES
 
