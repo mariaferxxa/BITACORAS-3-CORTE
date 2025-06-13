@@ -1,26 +1,26 @@
-# Identificacion de sistemmas por curvas de reaccion
+# Identificacion de sistemas por curvas de reaccion
 ## Introduccion
 En el diseño y sintonización de controladores, particularmente de los controladores PID, resulta indispensable conocer con suficiente precisión el comportamiento dinámico de la planta que se desea regular. Esta necesidad es clave para garantizar el rendimiento esperado del sistema en condiciones reales de operación. Debido a que en entornos industriales muchas veces no se dispone de un modelo matemático detallado o exacto del sistema, se recurre a diversas metodologías de identificación que permiten obtener modelos aproximados a partir de la observación de la respuesta del sistema ante entradas específicas. Estas técnicas de identificación pueden ser empíricas, de lazo abierto o cerrado, y permiten caracterizar de forma adecuada la dinámica de la planta, facilitando así la correcta elección de los parámetros del controlador.
 ## Conceptos claves
-Modelo de sistema: representación matemática de un proceso físico.
+> 🔑 **Modelo de sistema: representación matemática de un proceso físico.**
 
-Curva de reacción: respuesta temporal del sistema a un escalón.
+> 🔑 **Curva de reacción: respuesta temporal del sistema a un escalón.**
 
-Tiempo muerto (): retardo antes de que el sistema responda.
+> 🔑 **Tiempo muerto (to): retardo antes de que el sistema responda.**
 
-Constante de tiempo (): mide qué tan rápido responde el sistema.
+> 🔑 **Constante de tiempo ($\tau$): mide qué tan rápido responde el sistema.**
 
-Ganancia estática (): relación entre el cambio de salida y entrada.
+> 🔑 **Ganancia estática (k): relación entre el cambio de salida y entrada.**
 
-Identificación empírica: obtención de modelos a partir de datos.
+> 🔑 **Identificación empírica: obtención de modelos a partir de datos.**
 
-Sistema inestable: aquel que no regresa al equilibrio sin control.
+> 🔑 **Sistema inestable: aquel que no regresa al equilibrio sin control.**
 
-Integrador: sistema cuya salida se acumula con el tiempo.
+> 🔑 **Integrador: sistema cuya salida se acumula con el tiempo.**
 
-FOPDTI: modelo de primer orden con retardo y factor integrador.
+> 🔑 **FOPDTI: modelo de primer orden con retardo y factor integrador.**
 
-IPDT: modelo de sistema integrador con tiempo muerto.
+> 🔑 **IPDT: modelo de sistema integrador con tiempo muerto.**
 
 ## Identificacion de sistemas
 La identificación de sistemas es una técnica de análisis que permite construir modelos matemáticos de un sistema real a partir de datos experimentales. Esto implica aplicar una entrada conocida al sistema (como un escalón) y observar la salida para deducir cómo responde.
@@ -70,20 +70,77 @@ La respuesta al escalón debe ser suave, sin oscilaciones bruscas.
 Estos métodos permiten calcular un modelo de primer orden con retardo, muy útil para controladores PID.
 
 ### Metodo Ziegler-Nichols
+![image](https://github.com/user-attachments/assets/18bf41a4-0f81-4d2d-a6a5-df1bce774eac)
+
+Este es uno de los primeros métodos empíricos de identificación de sistemas, desarrollado por Ziegler y Nichols en los años 40. Su objetivo es modelar sistemas de tipo entrada escalón – salida sin necesidad de derivar un modelo matemático riguroso.
+Funciona aplicando una entrada escalon al sistema y se registra la respuesta del sistema, luego de esto se traza una recta tangente en el punto de inflexion de esa curva. el punto donde esta recta intersecta el eje tiempo es el tiempo muerto $t_{m}$ 
+El momento donde la curva alcanza un valor cercano al 100% de su cambio es $\tau'$ y la constante de tiempo se calcula como:
+
+$$\tau=\tau' - t_{m}$$
+
+y la ganancia estatica es:
+
+$$K=\frac{\Delta y}{\Delta u}$$
+
+el problema de este metodo es que no es repetible ante una misma prueba lo cual no es deseable
+
 ### Metodo Miller
+![image](https://github.com/user-attachments/assets/5b1707c2-f092-48ed-828f-356a02109939)
+
+El método de Miller es una mejora del método de Ziegler & Nichols para hacerlo más repetible y menos subjetivo.
+A comparacion de Ziegler-Nichols, en lugar de estimar la contante de tiempo observando el 100% de la respuesta, miller usa el 63.2% del valor final
+
+Estos metodos surgieron cuando no existian herramientas computacionales modernas y modelar un sistema requeria resolver ecuaciones diferenciales complejas a mano. 
+Permitia hacer control sin conocer el modelo exacto del sistema
+
 ### Metodo de dos puntos
+![image](https://github.com/user-attachments/assets/953ba115-df1d-4752-b8db-adb77f27d7df)
+
+Aparece como una evolución del método de Ziegler & Nichols, ya que los métodos basados en la recta tangente (de un solo punto) pueden ser inexactos debido a la dificultad para identificar el punto de inflexión de forma precisa.
+
+#### paso a paso:
+- se aplica un escalon al sistema
+- se registra la respuesta del sistema
+- se identifican dos instantes de tiempo $t_{1}$ y $t_{2}$ , en donde la salida alcanza ciertos porcentajes de cambio total (estos porcentajes dependen del autor del metodo)
+- A partir de estos dos tiempos, se usan las siguientes formulas para hallar: el tiempo muerto, constante de tiempo y la ganancia estatica
+  
+  $$\tau =At_{1}+Bt_{2}$$
+
+$$t_{o} =Ct_{1}+Dt_{2}$$
+
+$$K=\frac{\Delta y}{\Delta u}$$
+
+##### Constantes
+
+![image](https://github.com/user-attachments/assets/6b524145-6400-4d08-9ff4-8d05849026ed)
+
+### Ejemplos----------------------------------------------------
+
+
+### Metodo de 2 puntos Segundo orden
+con este mismo metodo tambien es posible obtener funciones de transferencia de segundo mas el tiempo muerto, lo que cambian son las constantes y el modelo de la funcion de transferencia
+
+$$G(s)=\frac{k*e^{-t_{o}s}}{(\tau s+1)(\tau s+1)}$$
+
+![image](https://github.com/user-attachments/assets/43a1fe02-70f0-42be-9bd3-d8b2f0f45cd6)
+
+#### EJEMPLO------------------------------------------------------------------
 
 ## Sistemas inestables en lazo abierto
 Hay sistemas que no se pueden operar sin retroalimentación, porque divergen o no regresan al equilibrio. Sin embargo, con precaución, se pueden identificar usando curvas de reacción y aproximaciones matemáticas.
 
 Ejemplo típico: un motor DC en control de posición.
 
-Este modelo incluye una acción integradora (el sistema acumula errores), lo que refleja mejor su comportamiento real.
+$$G(s)=\frac{ke^{-t_{o}s}}{(\tau s+1)s}$$
+
+Este modelo incluye una acción integradora (el sistema acumula errores), lo que refleja mejor su comportamiento real. El uso de modelos tipo FOPDTI permite representar adecuadamente estos procesos y diseñar controladores robustos que compensen dicha inestabilidad.
 
 ## Aproximacion IPDT
 IPDT (Integrating Plus Dead Time) se usa cuando la planta tiene un comportamiento netamente integrador: la salida sigue creciendo mientras la entrada se mantiene constante. Ejemplo: llenado de un tanque.
 
 Modelo:
+
+$$G(s)=\frac{ke^{-t_{o}s}}{s}$$
 
 Identificación:
 
