@@ -1,4 +1,4 @@
-
+# Sintonizacion PID en lazo abierto
 # INTRODUCCIÓN
 La sintonización de controladores PID en lazo abierto representa uno de los pilares fundamentales del control clásico. Este tipo de controladores, compuesto por tres acciones (proporcional, integral y derivativa), ha sido utilizado ampliamente desde sus primeras aplicaciones en el gobierno de buques en 1922 por Minorsky. El desarrollo de sus formas comerciales en la década de 1930 por Taylor Instrument Company marcó el inicio del control industrial automático.
 Los controladores PID pueden configurarse bajo diferentes arquitecturas y deben sintonizarse para garantizar el rendimiento deseado del sistema. Existen diversos métodos de sintonización, desde los empíricos como Ziegler-Nichols, hasta los basados en criterios de optimización y funciones de costo.
@@ -122,15 +122,40 @@ La siguiente tabla permite calcular los parámetros PID según el tipo de contro
 | PI                  |  $\frac{0.9\tau}{t_{o}K}$  | $3.3t_{o}$| -          |
 | PID                 |  $\frac{1.2\tau}{t_{o}K}$  | $2t_{o}$  | $0.5t_{o}$ | 
 
+#### Ejemplo
+Se tiene una planta cuya curva de reaccion a una entrada escalon muestra: K=2.5, to=3 y $\tau = 9$ . hacer un controlador PID en arquitectura paralela
 
+$$K_{p}=\frac{1.2\tau}{t_{o}K}= \frac{1.2 * 9}{3 * 2.5}=1.44$$
 
+$$T_{i}=2t_{o}=2* 3= 6$$
+
+$$T_{d}=0.5t_{o}=0.5* 3= 1.5$$
+
+Ahora para la arquitectura paralela 
+
+$$U(s)=1.44E(s)+6\frac{E(s)}{s}+1.5s*E(s)$$
 
 ### 4.3. Cohen-Coon:
 Este método proporciona una mejor respuesta que Ziegler-Nichols en sistemas donde el tiempo muerto no domina totalmente la dinámica del proceso. Las fórmulas consideran la compensación del retardo y permiten una respuesta más rápida y con menor sobreimpulso en muchos casos prácticos. Este método está especialmente indicado cuando se desea una sintonización inicial más refinada sin necesidad de recurrir a simulaciones complejas.
 
 #### Tabla
-![image](https://github.com/user-attachments/assets/5d506d69-b03f-4d99-b001-8b9091760ae2)
+![image](https://github.com/user-attachments/assets/9a54953f-334c-4ce8-a9d0-34a1675c0a68)
 
+
+#### Ejemplo
+Con los datos del ejemplo anterior calcular el PID tambien para una arquitectura paralela
+
+$$k_{p}=\frac{1}{K}*\frac{\tau}{t_{o}} *(\frac{16\tau +3t_{o}}{12\tau})\longrightarrow $$
+
+$$k_{p}=\frac{1}{2.5} * \frac{9}{3}*(\frac{16(9)+3(3)}{12(9)})=1.7$$
+
+$$T_{i}=\frac{3(32(9)+6(3))}{13(9)+8(3)}=6.51$$
+
+$$T_{d}=\frac{4(3)(9)}{11(9)+2(3)}=1.028$$
+
+Ahora para la arquitectura paralela 
+
+$$U(s)=1.7E(s)+6.51\frac{E(s)}{s}+1.028s*E(s)$$
 
 ### 4.4. Coeficiente de ajustabilidad:
 Este método se basa en un parámetro adimensional $\gamma=\frac{t_{m}}{\tau}$ , donde $t_{m}$  es el tiempo en el que la respuesta alcanza su máximo y $\tau$ la constante de tiempo del modelo. En función del valor de , se determinan los valores de $k_{p}, T_{i}, T_{d}$  con reglas ajustadas a ese comportamiento dinámico particular. Ofrece una sintonización más precisa adaptada a distintos regímenes dinámicos del sistema, y se considera una evolución de las tablas clásicas al incorporar el efecto del sobreimpulso observado en la curva de respuesta.
