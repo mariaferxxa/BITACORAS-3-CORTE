@@ -114,7 +114,16 @@ $$K=\frac{\Delta y}{\Delta u}$$
 
 ![image](https://github.com/user-attachments/assets/6b524145-6400-4d08-9ff4-8d05849026ed)
 
-### Ejemplos----------------------------------------------------
+### Ejemplos
+#### Ejemplo 1
+¿Qué metodo tiene los porcentajes de 28.3% y 63.2%?
+Se observan dos puntos de la curva escalon: al 28.3% del valor final en $t_{1}=2s$ y al 63.2% en $t_{2}=4s$. Aplicando el método y sus constantes halle la funcion de transferencia
+
+$$\tau = (-1.5)(2)+(1.5)(4)=3 segundos$$
+
+$$t_{0}=(1.5)(2)+(-0.5)(4)=1 segundos$$
+
+$$K=\frac{\Delta y}{\Delta u}=\frac{5-0}{2-0}=2.5$$
 
 
 ### Metodo de 2 puntos Segundo orden
@@ -153,6 +162,53 @@ $$K=\frac{O_{2}-O_{1}}{(I_{2}-I_{1})(T_{3}-T_{2})}$$
 $$t_{0}=T_{2}-T_{1}$$
 
 Esto permite diseñar controladores incluso en procesos lentos o acumulativos.
+
+## Ejercicios
+### Ejercicio 1
+![image](https://github.com/user-attachments/assets/c75a16f8-e5f9-4924-bdd9-d029003c7143)
+
+Dada la siguiente grafica, hallar las constantes por el método de Alfaro
+
+El valor final es 4 por lo tanto:
+$P2=4 * 0.75=3$
+
+$P1=4 * 0.25 =1$
+
+En la grafica los tiempos son
+t1= 0.553 y t2=2.76
+
+Ahora vamos a hallar los parametros
+
+$$\tau = (-0.910)(0.553)+(0.910)(2.76)=2 $$
+
+$$t_{0}=(1.262)(0.553)+(-0.262)(2.76)=-0.025$$
+
+$$K=\frac{4-0}{1-0}=4$$
+
+$$G(s)=4*\frac{e^{0.025s}}{2s+1}$$
+
+### Ejercicio 2
+![image](https://github.com/user-attachments/assets/abebc9d4-ece3-46ec-b7ea-451dae218028)
+
+Obtener la funcion de tranferencia de segundo orden por el método de Ho
+
+El valor final es 1.33 por lo tanto:
+$P2=1.33 * 0.85=1.130$
+
+$P1=1.33 * 0.35 =0.47$
+
+En la grafica los tiempos son
+t1= 1.23 y t2=4.7
+
+Ahora vamos a hallar los parametros
+
+$$\tau = (-0.463)(1.23)+(0.463)4.7)=1.606 $$
+
+$$t_{0}=(1.574)(1.23)+(-0.574)(4.7)=-0.761$$
+
+$$K=\frac{1.33-0}{1-0}=1.33$$
+
+$$G(s)=\frac{1.33*e^{0.765s}}{2.58s^{2}+3.21s+1}$$
 
 ## Conclusiones
 La identificación de sistemas es una herramienta esencial en el diseño de sistemas de control automático. Permite obtener modelos matemáticos que, aunque aproximados, resultan suficientes para lograr un control eficiente de procesos reales. A través de metodologías empíricas y técnicas de lazo abierto, es posible caracterizar dinámicamente una planta sin necesidad de conocer todas sus ecuaciones internas.
