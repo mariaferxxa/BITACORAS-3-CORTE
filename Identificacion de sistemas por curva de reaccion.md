@@ -133,7 +133,24 @@ $$G(s)=\frac{k*e^{-t_{o}s}}{(\tau s+1)(\tau s+1)}$$
 
 ![image](https://github.com/user-attachments/assets/43a1fe02-70f0-42be-9bd3-d8b2f0f45cd6)
 
-#### EJEMPLO------------------------------------------------------------------
+#### Ejemplo 2
+![image](https://github.com/user-attachments/assets/b0378611-778b-4351-8c33-0d93a5f341ab)
+
+Teniendo esta grafica vamos a hallar las constantes por el metodo de Ho
+ 
+ $$\tau =At_{1}+Bt_{2}$$
+
+$$\tau = (-0.463)(4.2)+(0.463)(9.41)=2.41 $$
+
+$$t_{o} =Ct_{1}+Dt_{2}$$
+
+$$t_{0}=(1.574)(4.2)+(-0.574)(9.41)=1.209$$
+
+$$K=\frac{\Delta y}{\Delta u}=\frac{2-0}{1-0}=2$$
+
+y finalmente queda
+
+$$G(s)=\frac{2*e^{1.209s}}{5.808s^{2}+4.82s+1}$$
 
 ## Sistemas inestables en lazo abierto
 Hay sistemas que no se pueden operar sin retroalimentación, porque divergen o no regresan al equilibrio. Sin embargo, con precaución, se pueden identificar usando curvas de reacción y aproximaciones matemáticas.
@@ -165,33 +182,35 @@ Esto permite diseñar controladores incluso en procesos lentos o acumulativos.
 
 ## Ejercicios
 ### Ejercicio 1
-![image](https://github.com/user-attachments/assets/c75a16f8-e5f9-4924-bdd9-d029003c7143)
+![image](https://github.com/user-attachments/assets/2f4511cd-6fd6-40f4-9b6e-ff156d9b9fd9)
 
 Dada la siguiente grafica, hallar las constantes por el método de Alfaro
-
-El valor final es 4 por lo tanto:
-$P2=4 * 0.75=3$
-
-$P1=4 * 0.25 =1$
-
-En la grafica los tiempos son
-t1= 0.553 y t2=2.76
-
-Ahora vamos a hallar los parametros
-
-$$\tau = (-0.910)(0.553)+(0.910)(2.76)=2 $$
-
-$$t_{0}=(1.262)(0.553)+(-0.262)(2.76)=-0.025$$
-
-$$K=\frac{4-0}{1-0}=4$$
-
-$$G(s)=4*\frac{e^{0.025s}}{2s+1}$$
 
 ### Ejercicio 2
 ![image](https://github.com/user-attachments/assets/abebc9d4-ece3-46ec-b7ea-451dae218028)
 
 Obtener la funcion de tranferencia de segundo orden por el método de Ho
 
+### Solucion ejercicio 1
+El valor final es 4 por lo tanto:
+$P2=2 * 0.75=1.5$
+
+$P1=2 * 0.25 =0.5$
+
+En la grafica los tiempos son
+t1= 3.46 y t2= 7.82
+
+Ahora vamos a hallar los parametros
+
+$$\tau = (-0.910)(3.46)+(0.910)(7.82)=3.96 $$
+
+$$t_{0}=(1.262)(3.46)+(-0.262)(7.82)=2.31$$
+
+$$K=\frac{2-0}{1-0}=2$$
+
+$$G(s)=2*\frac{e^{-2.31s}}{3.96s+1}$$
+
+### Solucion ejercicio 2
 El valor final es 1.33 por lo tanto:
 $P2=1.33 * 0.85=1.130$
 
