@@ -78,10 +78,22 @@ Cada arquitectura tiene ventajas según el tipo de planta y facilidad de impleme
 - Integral: Elimina el error permanente pero puede ralentizar la respuesta.
  
 - Derivativa: Suaviza la respuesta, disminuyendo el sobreimpulso, pero puede generar ruido si se exagera.
-
+  
 ## CRITERIOS DE DESEMPEÑO PARA DISEÑO DE PID
-### Funciones de costo mas utilizadas
+### Funciones de costo más utilizadas
 Este es un método más técnico y matemático, ideal para usar en simulaciones o con sistemas complejos. Aquí, en lugar de ajustar a mano, se define una función de costo que mide qué tan bien está funcionando el sistema, y luego se busca minimizar esa función.
+
+Se elige una función de costo que represente lo que se quiere optimizar. Por ejemplo:
+
+-IE: mide el error acumulado.
+
+-ISE: penaliza mucho los errores grandes (eleva el error al cuadrado).
+
+-IAE: mide el total de errores sin importar su dirección.
+
+-ITAE: penaliza más los errores que ocurren tarde en el tiempo (muy útil para mejorar estabilidad y rapidez).
+
+Este método permite encontrar una configuración del PID más óptima y precisa, especialmente útil cuando se busca rendimiento profesional o cuando se trabaja en simulaciones donde el ajuste manual sería muy lento o ineficiente.
 
 ## MÉTODOS DE SINTONIZACIÓN EN LAZO ABIERTO
 
@@ -101,11 +113,19 @@ Este método sirve para ajustar el comportamiento del sistema de manera práctic
 ### 4.2. Ziegler & Nichols (curva de reacción):
 Usa modelo tipo FOPDT identificado previamente:
 Tablas permiten calcular los parámetros PID según el tipo de controlador:
-P: 
 
-PI: 
++---------------------+----------------------------+----------+----------+--+
+| tipo de controlador | Kp                         | Ti       | Td       |  |
++---------------------+----------------------------+----------+----------+--+
+| P                   | $\frac{\tau}{t_{o}K}$      | -        | -        |  |
++---------------------+----------------------------+----------+----------+--+
+|                     | $ \frac{0.9\tau}{t_{o}K}$  | $3.3t_{o}$| -        |  |
++---------------------+----------------------------+----------+----------+--+
+|                     |  $\frac{1.2\tau}{t_{o}K}$  | $2t_{o}$  | $0.5t_{o}$ |  |
++---------------------+----------------------------+----------+----------+--+
 
-PID: 
+
+
 
 ### 4.3. Cohen-Coon:
 Proporciona mejor desempeño cuando el retardo no es muy dominante. Usa también parámetros  para definir:
