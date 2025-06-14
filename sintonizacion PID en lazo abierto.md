@@ -178,12 +178,48 @@ Con la funcion de transferencia
 $$G(s)=\frac{10}{40s+1}e^{-2s}$$
 
 Hacer un controlador PI
+#### Ejercicio 2
+A partir de la funcion de transferencia, diseñar un controlador P, PI y PID en arquitectura ideal por el metodo de Ziegler y Nichols
 
+$$G(s)=2*\frac{e^{-2.31s}}{3.96s+1}$$
+
+#### Solucion ejercicio 1
 $$K_{c}=\frac{0.9\tau}{kt_{0}}=\frac{0.9(40)}{10(2)}=1.8$$
 
-$$T_{i}=\frac{t_{d}}{0.3}=\frac{2}{0.3}=6.66$$
+$$T_{i}=3.3t_{0}=3.3(2)=6.66$$
 
-$$G_{c}(s)=\frac{k_{c}(s+\frac{1}{t_{d}})}{s}=\frac{1.8(s+\frac{1}{6.66})}{s}$$
+$$U(s)=1.8(1+\frac{1}{6.66s})$$
+
+#### Solucion ejercicio 2
+- controlador Proporcional
+  
+$$k_{p}=\frac{\tau}{t_{o}K}=\frac{3.96}{2.31*2}=0.857$$
+
+*arquitectura ideal*
+
+$$U(s)=k_{p}=0.857$$
+
+- Controlador PI
+
+$$k_{p}=\frac{0.9(3.96)}{2.31*2}=0.771$$
+
+$$T_{i}=3.3(2.31)=7.62$$
+
+*Arquitectura ideal*
+
+$$U(s)=0.771(1+\frac{1}{7.62s})$$
+
+- Controlador PID
+
+$$k_{p}=\frac{1.2(3.96)}{2.31*2}=1.028$$
+
+$$T_{i}=2(2.31)=4.62$$
+
+$$T_{d}=0.5(2.31)=1.155$$
+
+*Arquitectura ideal*
+
+$$U(s)=1.028(1+\frac{1}{4.62s}+1.155s)$$
 
 ## CONCLUSIONES
 
