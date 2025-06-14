@@ -125,6 +125,8 @@ $$\frac{P_{u}}{1.2}=\frac{1.894}{2}=0.947$$
 
 $$\frac{P_{u}}{1.2}=\frac{1.894}{8}=0.236$$
 
+-----
+
 #### Ejemplo 2
 #### Sintonización PID en Lazo Cerrado (Ziegler-Nichols)
 
@@ -138,7 +140,6 @@ $$
 
 Queremos diseñar un controlador PID que regule la salida del sistema con buen desempeño (tiempo de respuesta adecuado, mínimo sobreimpulso y sin oscilaciones sostenidas).
 
----
 
 #### Pasos del Método de Ziegler-Nichols en Lazo Cerrado
 
@@ -157,7 +158,6 @@ Supongamos que esto ocurre cuando:
 - Ganancia crítica: $K_{cr} = 20$
 - Período de oscilación: $P_{cr} = 4$ s
 
----
 
 #### 2. Aplica las reglas de Ziegler-Nichols
 
@@ -172,7 +172,6 @@ Donde:
 - $T_i$ es el tiempo integral (acción I)
 - $T_d$ es el tiempo derivativo (acción D)
 
----
 
 #### 3. Controlador PID resultante
 
@@ -202,6 +201,8 @@ a= 1.1°C ; tc=6.7min
 Calcular la ganancia critica
 
 $$K_{c}=\frac{4(10)}{\pi\sqrt{1.1^{2}-0.5^{2}}}\cong 13$$
+
+----
 
 ### Ejercicio 2
 Teniendo la siguiente funcion de transferencia en lazo cerrado, encontrar los parametros Pu y Ku. Tambien hallar el controlador PID
