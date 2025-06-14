@@ -142,6 +142,41 @@ Calcular la ganancia critica
 
 $$K_{c}=\frac{4(10)}{\pi\sqrt{1.1^{2}-0.5^{2}}}\cong 13$$
 
+### Ejercicio 2
+Teniendo la siguiente funcion de transferencia en lazo cerrado, encontrar los parametros Pu y Ku. Tambien hallar el controlador PID
+
+$$Go=\frac{k_{p}}{8s^{3}+12s^{2}+6s+5+k_{p}}$$
+
+$${8s^{3}+12s^{2}+6s+5+k_{p}}={8(jw)^{3}+12(jw)^{2}+6(jw)+5+k_{p}}$$
+
+Separamos la parte Real de la imaginaria 
+
+$$jw(8(jw)^{2}+6)+(12(jw)^{2}+5+k_{p})$$ 
+
+Para hallar Pu, igualamos la parte Real a cero (0)
+
+$$jw(8(jw)^{2}+6)=0\longrightarrow j(-8w^{2}+6)=0$$
+
+$$(-8w^{2}+6)=0\longrightarrow w=\sqrt{\frac{6}{8}}$$
+
+$$P_{u}=\frac{2\pi}{\sqrt{\frac{6}{8}}}=7.255$$
+
+Ahora igualamos la parte Real a cero (0) para hallar Ku
+
+$$12(jw)^{2}+5+k_{p}\longrightarrow -12w^{2}+5+k_{p}=0$$
+
+$$ k_{p}=12w^{2}-5\longrightarrow  k_{p}=12(\frac{6}{8})-5$$
+
+$$k_{p}=4=k_{u}$$
+
+Con estos datos ya podemos encontrar los valores que necesitamos para el controlador PID
+
+$$K_{p}=0.6(4)=2.4$$
+
+$$T_{i}=\frac{7.255}{2}=3.627$$
+
+$$T_{d}=\frac{7.255}{8}=0.906$$
+
 ## CONCLUSIONES
 
 El diseño de controladores PID en lazo cerrado permite una aproximación más realista y práctica a la sintonización de controladores, especialmente en entornos industriales. Métodos como el de Ziegler & Nichols siguen siendo vigentes por su simplicidad y efectividad.
