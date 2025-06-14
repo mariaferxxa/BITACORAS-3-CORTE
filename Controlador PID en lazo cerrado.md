@@ -126,9 +126,9 @@ $$\frac{P_{u}}{1.2}=\frac{1.894}{2}=0.947$$
 $$\frac{P_{u}}{1.2}=\frac{1.894}{8}=0.236$$
 
 #### Ejemplo 2
-##### Sintonización PID en Lazo Cerrado (Ziegler-Nichols)
+#### Sintonización PID en Lazo Cerrado (Ziegler-Nichols)
 
-## Planteamiento del Sistema
+#### Planteamiento del Sistema
 
 Supongamos que tienes un sistema cuya función de transferencia es:
 
@@ -140,9 +140,9 @@ Queremos diseñar un controlador PID que regule la salida del sistema con buen d
 
 ---
 
-## Pasos del Método de Ziegler-Nichols en Lazo Cerrado
+#### Pasos del Método de Ziegler-Nichols en Lazo Cerrado
 
-### 1. Usa solo la parte proporcional del PID (controlador P puro)
+#### 1. Usa solo la parte proporcional del PID (controlador P puro)
 
 El controlador se reduce a:
 
@@ -159,7 +159,7 @@ Supongamos que esto ocurre cuando:
 
 ---
 
-### 2. Aplica las reglas de Ziegler-Nichols
+#### 2. Aplica las reglas de Ziegler-Nichols
 
 Con los valores de $K_{cr}$ y $P_{cr}$, se calculan los parámetros del controlador PID según la siguiente tabla:
 
@@ -174,7 +174,7 @@ Donde:
 
 ---
 
-### 3. Controlador PID resultante
+#### 3. Controlador PID resultante
 
 La forma paralela del controlador PID es:
 
